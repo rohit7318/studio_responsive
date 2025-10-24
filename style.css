@@ -26,6 +26,7 @@ html, body {
   width: 100%;
   height: 100%;
   min-height: 100%;
+  font-size: 14px;
 }
 
 body {
@@ -41,13 +42,148 @@ body {
   font-family: satoshi;
 }
 
+small,
+h2,
+h3,
+h1,
+h4 {
+  text-transform: uppercase;
+}
+
 main {
   padding: 18px;
+}
+main nav {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+main nav .nav-right {
+  display: flex;
+  align-items: stretch;
+  -moz-column-gap: 1rem;
+       column-gap: 1rem;
+}
+main nav .nav-right .mobile-nav {
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.5s ease;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 36px);
+  top: 10vh;
+  left: 50%;
+  transform: translateX(-50%);
+  gap: 0.8rem;
+  background-color: #232323;
+  padding: 1rem;
+  border-radius: 5px;
+}
+main nav .nav-right .mobile-nav button {
+  background-color: var(--btn-bg-clr);
+  font-size: clamp(1rem, 0.5vw, 1.3rem);
+  color: var(--heading-txt-clr);
+  padding: 1rem;
+  border: none;
+  border-radius: 5px;
+  font-family: "Roboto Mono", sans-serif;
+  text-transform: uppercase;
+  text-align: start;
+  justify-content: flex-start;
+  opacity: 0.7;
+}
+main nav .nav-right .mobile-nav button:hover {
+  opacity: 1;
+  cursor: pointer;
+}
+main nav .nav-right .cart-btn,
+main nav .nav-right .get-in-touch {
+  padding: 0.5rem 1.5rem;
+  cursor: pointer;
+}
+main nav .nav-right .cart-btn {
+  background-color: var(--btn-bg-clr);
+  font-size: clamp(1rem, 1vw, 2.2rem);
+  color: var(--heading-txt-clr);
+  border: none;
+  border-radius: 5px;
+  font-family: "Roboto Mono", sans-serif;
+  text-transform: uppercase;
+}
+main nav .nav-right .get-in-touch {
+  background-color: var(--btn-primar-bg-clr);
+  color: #1A1A1A;
+  font-weight: 400;
+  font-size: clamp(1rem, 1vw, 2.2rem);
+  border: none;
+  border-radius: 5px;
+  font-family: "Roboto Mono", sans-serif;
+  text-transform: uppercase;
+  display: none;
+}
+main nav .nav-right .hamburger {
+  width: 62px;
+  height: 62px;
+  background-color: transparent;
+  background-color: var(--btn-bg-clr);
+  padding: 16px;
+  position: relative;
+  cursor: pointer;
+  display: block;
+  border-radius: 5px;
+  overflow: hidden;
+}
+main nav .nav-right .line {
+  height: 4px;
+  width: 55%;
+  background-color: white;
+  transition: all 0.4s ease;
+  border-radius: 2px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(to right, red, blue);
+}
+main nav .nav-right #checkbox {
+  display: none;
+}
+main nav .nav-right .line.top {
+  top: 14px;
+}
+main nav .nav-right .line.middle {
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+main nav .nav-right .line.bottom {
+  bottom: 14px;
+}
+main nav .nav-right #checkbox:checked ~ .top,
+main nav .nav-right #checkbox:checked ~ .middle,
+main nav .nav-right #checkbox:checked ~ .bottom {
+  transform-origin: left;
+}
+main nav .nav-right #checkbox:checked ~ .top {
+  top: 50%;
+  transform: rotate(135deg) translate(-50%, -50%);
+}
+main nav .nav-right #checkbox:checked ~ .middle {
+  opacity: 0;
+}
+main nav .nav-right #checkbox:checked ~ .bottom {
+  top: 50%;
+  transform: rotate(-135deg) translate(-50%, -50%);
+}
+main nav .nav-right:has(#checkbox:checked) .mobile-nav {
+  opacity: 1;
+  visibility: visible;
 }
 main section.view1 {
   display: flex;
   flex-direction: column;
   row-gap: 1rem;
+  margin-top: 1rem;
 }
 main section.view1 img {
   border-radius: 10px;
@@ -58,14 +194,12 @@ main section.view1 .bottom {
   border-radius: 10px;
 }
 main section.view1 .bottom small {
-  text-transform: uppercase;
   font-family: "Roboto Mono", monospace;
 }
 main section.view1 .bottom .text {
   padding-top: 3.5rem;
 }
 main section.view1 .bottom .text h1 {
-  text-transform: uppercase;
   font-weight: 400;
   font-size: 2.2rem;
   line-height: 1.2;
@@ -92,8 +226,8 @@ main section.view1 .bottom .text .horizontal button.circle {
   width: 35px;
   height: 35px;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 }
 main section.view2 {
   margin-top: 1.5rem;
@@ -106,7 +240,6 @@ main section.view2 {
   text-align: center;
 }
 main section.view2 .card small {
-  text-transform: uppercase;
   font-family: "Roboto Mono", monospace;
   font-size: 0.6rem;
   opacity: 0.7;
@@ -131,7 +264,6 @@ main section.view3 .card {
 }
 main section.view3 .card small {
   color: var(--heading-txt-clr);
-  text-transform: uppercase;
   font-family: "Roboto Mono", monospace;
   font-size: 0.6rem;
   opacity: 1;
@@ -142,7 +274,6 @@ main section.view3 .card .text {
 }
 main section.view3 .card .text h2 {
   font-size: 2rem;
-  text-transform: uppercase;
 }
 main section.view3 .card .text .para-container p {
   margin-top: 0.8rem;
@@ -155,7 +286,6 @@ main section.view3 .card .text .para-container p {
 main section.view4 h2 {
   font-size: 2rem;
   padding: 1rem 0 1rem 2rem;
-  text-transform: uppercase;
 }
 main section.view4 .cards-wrapper {
   display: grid;
@@ -188,8 +318,8 @@ main section.view4 .cards-wrapper .card .card-top div {
   padding: 0.5rem;
   aspect-ratio: 1/1;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 }
 main section.view4 .cards-wrapper .card .card-bottom {
   background-color: rgba(255, 255, 255, 0.2);
@@ -203,12 +333,9 @@ main section.view4 .cards-wrapper .card .card-bottom {
   align-items: center;
 }
 main section.view4 .cards-wrapper .card .card-bottom h3 {
-  text-transform: uppercase;
-  font-family: "chillax";
   letter-spacing: 3px;
 }
 main section.view4 .cards-wrapper .card .card-bottom h4 {
-  text-transform: uppercase;
   font-family: "Roboto Mono", sans-serif;
   font-size: 0.8rem;
 }
@@ -264,8 +391,8 @@ main section.view5 .text .text-bottom {
 }
 main section.view5 .text .text-bottom button {
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   background-color: transparent;
   padding: 0.5rem;
   border: 1px solid rgba(255, 255, 255, 0.495);
@@ -276,9 +403,6 @@ main section.view5 .text .text-bottom a {
   color: var(--heading-txt-clr);
   font-family: "Roboto Mono", sans-serif;
 }
-main section.view5 .text small, main section.view5 .text h2, main section.view5 .text a {
-  text-transform: uppercase;
-}
 main section.view6 {
   margin-top: 1rem;
   border-radius: 10px;
@@ -287,9 +411,6 @@ main section.view6 {
   display: flex;
   flex-direction: column;
   padding: 2.5rem;
-}
-main section.view6 .left small, main section.view6 .left h2 {
-  text-transform: uppercase;
 }
 main section.view6 .left small {
   font-size: 0.8rem;
@@ -304,18 +425,18 @@ main section.view6 .left h2 {
 }
 main section.view6 .right button {
   margin-top: 1rem;
-  border-radius: 5px;
   background-color: #121212;
   color: var(--heading-txt-clr);
-  border: none;
   width: 100%;
   font-size: 0.9rem;
   padding: 1.2rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  border-radius: 5px;
   font-family: "Roboto Mono", sans-serif;
   text-transform: uppercase;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   -moz-column-gap: 1rem;
        column-gap: 1rem;
 }
@@ -341,7 +462,6 @@ main section.bottom .card1 {
   row-gap: 4rem;
 }
 main section.bottom .card1 h3 {
-  text-transform: uppercase;
   font-family: "Roboto Mono", sans-serif;
   font-weight: 300;
 }
@@ -358,8 +478,8 @@ main section.bottom .card1 .links div {
   width: 45px;
   height: 45px;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 }
 main section.bottom .card2 {
   display: grid;
@@ -369,7 +489,6 @@ main section.bottom .card2 .text {
   padding-bottom: 1.7rem;
 }
 main section.bottom .card2 .text h2 {
-  text-transform: uppercase;
   font-family: "Chillax", sans-serif;
   font-size: 1.2rem;
   margin-bottom: 1.3rem;
@@ -385,7 +504,6 @@ main section.bottom .card2 .text .links a {
   color: white;
   font-family: "Roboto Mono", sans-serif;
   opacity: 0.5;
-  text-transform: uppercase;
   position: relative;
 }
 main section.bottom .card2 .text .links a::after {
@@ -402,12 +520,12 @@ main section.bottom .card2 .text .links a:hover::after {
   width: 100%;
 }
 main section.bottom .card2 .text .links button {
-  background-color: var(--btn-primar-bg-clr);
-  text-transform: uppercase;
-  padding: 1rem 1.2rem;
-  border-radius: 5px;
   border: none;
-  cursor: pointer;
+  border-radius: 5px;
+  font-family: "Roboto Mono", sans-serif;
+  text-transform: uppercase;
+  background-color: var(--btn-primar-bg-clr);
+  padding: 1rem 1.2rem;
 }
 main section.bottom footer p {
   text-transform: uppercase;
@@ -490,7 +608,7 @@ main section.bottom footer p span {
 }
 @media (min-width: 968px) {
   html {
-    font-size: 24px;
+    font-size: 18px;
   }
   main section.view1 {
     flex-direction: row;
@@ -523,6 +641,47 @@ main section.bottom footer p span {
   }
   main section.view2 {
     grid-template-columns: repeat(4, 1fr);
+  }
+  #get-in-touch {
+    white-space: nowrap;
+    font-size: 14px;
+  }
+  .ham-wrapper {
+    display: none;
+  }
+  main nav .nav-right .mobile-nav {
+    opacity: 1;
+    visibility: visible;
+    transition: all 0.5s ease;
+    position: unset;
+    display: flex;
+    align-items: flex-start;
+    background-color: red;
+    flex-direction: row;
+    top: unset;
+    left: unset;
+    transform: unset;
+    gap: 9px;
+    background-color: transparent;
+    padding: 0.6rem;
+    padding: 0;
+    border-radius: 0;
+  }
+  main nav .nav-right .mobile-nav button {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+  }
+  main nav .nav-right {
+    align-items: center;
+  }
+  main nav .nav-right button {
+    padding: 0;
+    font-size: 0.5vw;
+  }
+}
+@media (min-width: 500px) {
+  main nav .nav-right .get-in-touch {
+    display: unset;
   }
 }
 @media (min-width: 768px) {

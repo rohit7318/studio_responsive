@@ -31,6 +31,7 @@ html, body
       width: 100%;
       height: 100%;
       min-height: 100%;
+      font-size: 14px;
 }
 
 body 
@@ -48,15 +49,217 @@ body
       font-family: satoshi;
 }
 
+
+@mixin buttonStyle()
+{
+    border: none;
+    border-radius: 5px;
+    font-family: 'Roboto Mono',sans-serif;
+    text-transform: uppercase;
+}
+
+@mixin flex-center()
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin flex-column()
+{
+    display: flex;
+    flex-direction: column;
+}
+
+
+small,
+h2, 
+h3, 
+h1, 
+h4
+{
+    text-transform: uppercase;
+}
+
 main 
 {
       padding: 18px;
 
+      nav 
+      {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .nav-right 
+        {
+            display: flex;
+            align-items: stretch;
+            column-gap:1rem;
+
+            
+
+            .mobile-nav 
+            {
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.5s ease;
+                position: absolute;
+                display: flex;
+                flex-direction: column;
+                width: calc(100% - 36px);
+                
+                top: 10vh;
+                left: 50%;
+                transform: translateX(-50%);
+                gap: 0.8rem;
+                background-color: #232323;
+                padding: 1rem;
+                border-radius: 5px;
+                button 
+                {
+                     background-color: var(--btn-bg-clr);
+                    font-size: clamp(1rem,0.5vw,1.3rem);
+                    color: var(--heading-txt-clr);
+                    padding: 1rem;
+                    @include buttonStyle();
+                    text-align: start;
+                    justify-content: flex-start;
+                    opacity: 0.7;
+                }
+
+                button:hover 
+                {
+                    opacity: 1;
+                    cursor: pointer;
+                }
+            }
+
+            .cart-btn,
+            .get-in-touch
+            {
+                padding: 0.5rem 1.5rem;
+                cursor: pointer;
+            }
+
+            .cart-btn 
+            {
+                background-color: var(--btn-bg-clr);
+                font-size: clamp(1rem,1vw,2.2rem);
+                color: var(--heading-txt-clr);
+                @include buttonStyle();
+            }
+
+            .get-in-touch 
+            {
+                background-color: var(--btn-primar-bg-clr);
+                color: #1A1A1A;
+                font-weight: 400;
+                font-size: clamp(1rem,1vw,2.2rem);
+                @include buttonStyle();
+                display: none;
+
+            }
+
+
+
+            .hamburger 
+            {
+                width: calc(46px + 16px);
+                height: calc(46px + 16px);
+                background-color: transparent;
+                background-color:var(--btn-bg-clr);
+                padding: 16px;
+                position: relative;
+                cursor: pointer;
+                
+                
+                display: block;
+                border-radius: 5px;
+                overflow: hidden;
+
+               
+            }
+
+            .line 
+            {
+                height: 4px;
+                width: 55%;
+                background-color: white;
+                transition: all 0.4s ease;
+                border-radius: 2px;
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+                background: linear-gradient(to right, red,blue);
+                
+
+            }
+
+        #checkbox 
+        {
+            display: none;
+        }
+
+
+        .line.top 
+        {
+            top: 14px;
+        }
+        .line.middle 
+        {
+            top: 50%;
+            transform: translate(-50%,-50%);
+        }
+
+        .line.bottom 
+        {
+            bottom: 14px;
+        }
+
+
+        #checkbox:checked ~ .top,
+        #checkbox:checked ~ .middle,
+        #checkbox:checked ~ .bottom
+        {
+            transform-origin: left;
+        }
+
+        #checkbox:checked ~ .top 
+        {
+            top: 50%;
+            transform: rotate(135deg) translate(-50%,-50%);
+        }
+
+        #checkbox:checked ~ .middle 
+        {
+            opacity: 0;
+        }
+
+        #checkbox:checked ~ .bottom 
+        {
+            top: 50%;
+            transform: rotate(-135deg) translate(-50%,-50%);
+        }
+
+
+        }
+
+        .nav-right:has(#checkbox:checked) .mobile-nav 
+            {
+                // background-color: red;
+                opacity:1;
+                visibility: visible;
+                // transform: translateX(0);
+            }
+      }
+
       section.view1 
       {
-            display: flex;
-            flex-direction: column;
+            @include flex-column();
             row-gap: 1rem;
+            margin-top: 1rem;
 
             img 
             {
@@ -70,7 +273,6 @@ main
                   border-radius: 10px;
                   small 
                   {
-                        text-transform: uppercase;
                         font-family: 'Roboto Mono',monospace;
                   }
 
@@ -79,7 +281,6 @@ main
                         padding-top: 3.5rem;
                         h1 
                         {
-                              text-transform: uppercase;
                               font-weight: 400;
                               font-size: 2.2rem;
                               line-height: 1.2;
@@ -109,9 +310,7 @@ main
                                     border: 1px solid rgba(255, 255, 255, 0.587);
                                     width: 35px;
                                     height: 35px;
-                                    display: flex;
-                                    align-items: center;
-                                    justify-content: center;
+                                    @include flex-center();
                                     
                               }
                         }
@@ -137,7 +336,6 @@ main
         {
             small 
             {
-                text-transform: uppercase;
                 font-family: 'Roboto Mono',monospace;
                 font-size: 0.6rem;
                 opacity: 0.7;
@@ -170,7 +368,6 @@ main
             small 
             {
                 color: var(--heading-txt-clr);
-                text-transform: uppercase;
                 font-family: 'Roboto Mono',monospace;
                 font-size: 0.6rem;
                 opacity: 1;
@@ -184,7 +381,6 @@ main
                 h2 
                 {
                     font-size: 2rem;
-                    text-transform: uppercase;
                 }
 
                 .para-container 
@@ -212,7 +408,6 @@ main
         {
             font-size: 2rem;
             padding: 1rem 0 1rem 2rem;
-            text-transform: uppercase;
 
         }
 
@@ -229,8 +424,7 @@ main
                 background-repeat: no-repeat;
                 background-position: center;
                 padding: 1rem;
-                display: flex;
-                flex-direction: column;
+                @include flex-column();
                 justify-content: space-between;
                 aspect-ratio: 1/1;
                 border-radius: 10px;
@@ -250,9 +444,7 @@ main
                         border-radius: 50%;
                         padding: 0.5rem;
                         aspect-ratio: 1/1;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
+                        @include flex-center();
                     }
 
 
@@ -273,20 +465,18 @@ main
 
                     h3 
                     {
-                        text-transform: uppercase;
-                        font-family: 'chillax';
                         letter-spacing: 3px;
                     }
 
                     h4 
                     {
-                        text-transform: uppercase;
                         font-family: 'Roboto Mono',sans-serif;
                         font-size: 0.8rem;
                     }
             }
 
         }
+
         .card.one
         {
             background-image: url('https://assets-global.website-files.com/63cffb7c16ab3347fc9734c8/63d2ccbd7d003dfb6a1bdecb_team-01.webp');
@@ -330,8 +520,7 @@ main
 
         .text 
         {
-            display: flex;
-            flex-direction: column;
+            @include flex-column();
             justify-content: space-between;
             padding: 2rem;
             background-color: var(--card-bg-clr);
@@ -363,9 +552,7 @@ main
 
                 button 
                 {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
+                    @include flex-center();
                     background-color: transparent;
                     padding: 0.5rem;
                     border: 1px solid rgba(255, 255, 255, 0.495);
@@ -382,13 +569,6 @@ main
                 }
             }
 
-            small,h2,a 
-            {
-                text-transform: uppercase;
-
-            }
-
-            
         }
       }
 
@@ -399,16 +579,12 @@ main
         border-radius: 10px;
         background-color: var(--btn-primar-bg-clr);
         color: #1A1A1A;
-        display: flex;
-        flex-direction: column;
+        @include flex-column();
         padding: 2.5rem;
 
         .left 
         {
-            small,h2 
-            {
-                text-transform: uppercase;
-            }
+            
             small 
             {
                 font-size: 0.8rem;
@@ -430,19 +606,13 @@ main
             button 
             {
                 margin-top: 1rem;
-                border-radius: 5px;
                 background-color: #121212;
                 color: var(--heading-txt-clr);
-                border: none;
                 width: 100%;
                 font-size: 0.9rem;
                 padding: 1.2rem 0;
-                font-family: 'Roboto Mono',sans-serif;
-                text-transform: uppercase;
-
-                display: flex;
-                align-items: center;
-                justify-content: center;
+                @include flex-center();
+                @include buttonStyle();
                 column-gap: 1rem;
 
                 span 
@@ -472,15 +642,13 @@ main
         {
             margin-top: 1rem;
             background-color: var(--card-bg-clr);
-            display: flex;
-            flex-direction: column;
+            @include flex-column();
             justify-content: space-between;
             row-gap: 4rem;
 
 
             h3 
             {
-                text-transform: uppercase;
                 font-family: 'Roboto Mono',sans-serif;
                 font-weight: 300;
             }
@@ -493,15 +661,12 @@ main
                 div 
                 {
                     background-color: #2A2A2A;
-                    // padding: 0.5rem 0.8rem;
                     background-color: rgba(255,255,255,.05);
                     background-color: blur(2rem);
                     border-radius: 50%;
                     width: 45px;
                     height: 45px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
+                    @include flex-center();
                 }
             }
         }
@@ -519,7 +684,6 @@ main
                 padding-bottom: 1.7rem;
                 h2 
                 {
-                    text-transform: uppercase;
                     font-family: 'Chillax',sans-serif;
                     font-size: 1.2rem;
                     margin-bottom: 1.3rem;
@@ -527,8 +691,7 @@ main
 
                 .links 
                 {
-                    display: flex;
-                    flex-direction: column;
+                    @include flex-column();
                     align-items: flex-start;
                     row-gap: 1rem;
 
@@ -539,7 +702,6 @@ main
                         color: white;
                         font-family: 'Roboto Mono',sans-serif;
                         opacity: 0.5;
-                        text-transform: uppercase;
                         position: relative;
                     }
 
@@ -563,12 +725,9 @@ main
 
                     button 
                     {
+                        @include buttonStyle();
                         background-color: var(--btn-primar-bg-clr);
-                        text-transform: uppercase;
                         padding: 1rem 1.2rem;
-                        border-radius: 5px;
-                        border: none;
-                        cursor: pointer;
                     }
                 }
             }
@@ -736,7 +895,7 @@ main
 
     html 
     {
-        font-size: 24px;
+        font-size: 18px;
     }
     main section.view1
      {
@@ -784,11 +943,72 @@ main
         grid-template-columns: repeat(4,1fr);
     }
 
+    #get-in-touch 
+    {
+        // padding: 0;
+        white-space: nowrap;
+        font-size: 14px;
+
+    }
+
+    .ham-wrapper
+    {
+        display: none;
+    }
+    main nav .nav-right .mobile-nav
+    {
+                opacity: 1;
+                visibility: visible;
+                transition: all 0.5s ease;
+                position: unset;
+                display: flex;
+                align-items: flex-start;
+                background-color: red;
+                flex-direction: row;
+                top: unset;
+                left: unset;
+                transform:unset;
+                gap: 9px;
+                background-color: transparent;
+                padding: 0.6rem;
+                padding: 0;
+                border-radius: 0;
+
+                button 
+                {
+                    padding: 0.5rem 1rem;
+                    font-size: 1rem;
+                }
+    }
+
+    main nav .nav-right
+    {
+        align-items: center;
+
+    }
+
+    main nav .nav-right button 
+    {
+        padding: 0;
+        font-size: 0.5vw;
+
+    }
+
+
 
     
       
 }
 
+
+@media (min-width:500px)
+{
+    main nav .nav-right .get-in-touch
+    {
+        display: unset;
+    }
+    
+}
 
 
 
